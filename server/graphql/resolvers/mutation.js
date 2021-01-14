@@ -4,9 +4,9 @@ module.exports = {
   createUser: async (_, { email, password, name }) => {
     try {
       const newUser = new User({
-        name: name,
-        email: email,
-        password: password,
+        name,
+        email,
+        password,
       });
       const token = await newUser.generateAuthToken();
       newUser.token = token;
@@ -23,7 +23,6 @@ module.exports = {
       user.token = token;
       return user;
     } catch (err) {
-      console.log(err);
       return err;
     }
   },
