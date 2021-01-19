@@ -33,4 +33,28 @@ export default makeStyles((theme) => ({
   link: {
     color: "#000",
   },
+  user: {
+    color: "#ccc",
+    marginLeft: ".5rem",
+  },
+  chatContainer: {
+    paddingTop: "5rem",
+    paddingBottom: "10rem",
+  },
+  inputContainer: {
+    position: "fixed",
+    backgroundColor: "#fff",
+    zIndex: "2",
+    width: "100%",
+    bottom: "0",
+  },
+  inputWrapper: {
+    display: "flex",
+    justifyContent: "space-between",
+    padding: "1rem 0",
+  },
+  inputElements: {
+    margin: ".5rem",
+    height: "3rem",
+  },
 }));

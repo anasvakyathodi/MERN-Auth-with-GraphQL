@@ -13,17 +13,30 @@ const schema = gql`
     tokens: [Token]
     token: String
   }
-  type Message {
+  type LogoutResponse {
     message: String
   }
+
+  type Message {
+    id: ID!
+    user: String!
+    content: String!
+  }
+
   type Query {
     users: [User!]
+    messages: [Message!]
   }
 
   type Mutation {
     createUser(email: String, password: String, name: String): User
     login(email: String, password: String): User
-    logout(token: String): Message
+    logout(token: String): LogoutResponse
+    postMessage(user: String, content: String): ID!
+  }
+
+  type Subscription {
+    messages: [Message!]
   }
 `;
 

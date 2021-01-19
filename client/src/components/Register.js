@@ -9,19 +9,11 @@ import {
 } from "@material-ui/core";
 import { PersonAdd } from "@material-ui/icons";
 import useStyles from "./Styles/style";
-import { useMutation, gql } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { useHistory, Link } from "react-router-dom";
+import { USER_REGISTER } from "./graphql/models";
 
-const USER_REGISTER = gql`
-  mutation CreateUser($email: String, $password: String, $name: String) {
-    createUser(email: $email, password: $password, name: $name) {
-      name
-      token
-    }
-  }
-`;
-
-const Register = ({ setUserData }) => {
+const Register = ({ setUserData, setAlert }) => {
   const classes = useStyles();
   const history = useHistory();
   const [register] = useMutation(USER_REGISTER);
@@ -46,6 +38,7 @@ const Register = ({ setUserData }) => {
         setFormData(initialState);
         localStorage.setItem("auth-token", token);
         localStorage.setItem("auth-name", user);
+        setAlert({ state: true, message: "Successfully Registered!" });
         history.replace("/");
       })
       .catch((err) => alert(err.message));

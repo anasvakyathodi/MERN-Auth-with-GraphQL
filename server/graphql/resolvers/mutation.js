@@ -1,4 +1,6 @@
 const User = require("./../../models/users"); //Mongoose User Schema
+const messages = require("./../messages");
+const subscribers = require("./../subscribers");
 const jwt = require("jsonwebtoken");
 module.exports = {
   createUser: async (_, { email, password, name }) => {
@@ -44,5 +46,11 @@ module.exports = {
     } catch (error) {
       return error;
     }
+  },
+  postMessage: (_, { user, content }) => {
+    const id = messages.length;
+    messages.push({ id, user, content });
+    subscribers.forEach((fn) => fn());
+    return id;
   },
 };

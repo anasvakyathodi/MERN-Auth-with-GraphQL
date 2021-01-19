@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useMutation, gql } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import {
   Avatar,
   Button,
@@ -11,16 +11,9 @@ import {
 import { VerifiedUser } from "@material-ui/icons";
 import useStyles from "./Styles/style";
 import { useHistory, Link } from "react-router-dom";
-const USER_LOGIN = gql`
-  mutation Login($email: String, $password: String) {
-    login(email: $email, password: $password) {
-      name
-      token
-    }
-  }
-`;
+import { USER_LOGIN } from "./graphql/models";
 
-const SignIn = ({ setUserData }) => {
+const SignIn = ({ setUserData, setAlert }) => {
   const history = useHistory();
   const classes = useStyles();
   const [login] = useMutation(USER_LOGIN);
@@ -43,10 +36,11 @@ const SignIn = ({ setUserData }) => {
         setFormData(initialState);
         localStorage.setItem("auth-token", token);
         localStorage.setItem("auth-name", user);
+        setAlert({ state: true, message: "Successfully LoggedIn!" });
         history.replace("/");
       })
       .catch((err) => {
-        alert(err.message);
+        setAlert({ state: true, message: err.message });
         console.log(err.message);
       });
   };

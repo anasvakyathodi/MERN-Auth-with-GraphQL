@@ -1,4 +1,5 @@
 const User = require("./../../models/users"); //Mongoose User Schema
+const messages = require("./../messages");
 
 module.exports = {
   users: async (args) => {
@@ -9,4 +10,5 @@ module.exports = {
       return err;
     }
   },
+  messages: () => messages,
 };
