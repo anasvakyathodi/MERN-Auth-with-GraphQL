@@ -16,7 +16,10 @@ const ChatInput = ({ setAlert, user }) => {
       setAlert({ state: true, message: "No Input Added" });
     } else {
       sendMessage({ variables: { user, content } })
-        .then(() => setContent(""))
+        .then(() => {
+          setContent("");
+          window.scrollTo(0, document.body.scrollHeight);
+        })
         .catch(() => setAlert({ state: true, message: "Error on Message" }));
     }
   };
@@ -31,17 +34,18 @@ const ChatInput = ({ setAlert, user }) => {
       >
         <TextField
           id="message-input"
-          label="Message"
           fullWidth
-          variant="filled"
+          variant="outlined"
+          placeholder="Message"
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          className={classes.inputElements}
+          className={classes.inputText}
+          autoFocus
         />
         <Button
           type="submit"
           variant="outlined"
-          className={classes.inputElements}
+          className={classes.inputButton}
           endIcon={<Send />}
           disabled={content.length === 0 ? true : false}
         >

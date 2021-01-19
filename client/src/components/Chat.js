@@ -1,10 +1,10 @@
 import React from "react";
-import { Grid, Chip, Avatar, Typography, Container } from "@material-ui/core";
+import { Grid, Chip, Typography, Container, Box } from "@material-ui/core";
 import useStyles from "./Styles/style";
 import { GET_MESSAGES } from "./graphql/models";
 import { useSubscription } from "@apollo/client";
 
-const Chat = () => {
+const Chat = (props) => {
   const classes = useStyles();
   const { data } = useSubscription(GET_MESSAGES);
   if (!data) {
@@ -15,14 +15,16 @@ const Chat = () => {
       <Grid container spacing={2}>
         {data.messages.map(({ id, user, content }) => (
           <Grid item xs="12">
-            <Chip
-              variant="outlined"
-              label={content}
-              avatar={<Avatar>{user.charAt(0).toUpperCase()}</Avatar>}
-            />
-            <Typography variant="caption" className={classes.user}>
-              {user}
-            </Typography>
+            <Box
+              display="flex"
+              alignItems="center"
+              flexDirection={props.user === user ? "row-reverse" : "row"}
+            >
+              <Chip variant="outlined" label={content} />
+              <Typography variant="caption" className={classes.user}>
+                {props.user === user || user}
+              </Typography>
+            </Box>
           </Grid>
         ))}
       </Grid>

@@ -39,7 +39,7 @@ export default makeStyles((theme) => ({
   },
   chatContainer: {
     paddingTop: "5rem",
-    paddingBottom: "10rem",
+    paddingBottom: "7rem",
   },
   inputContainer: {
     position: "fixed",
@@ -53,8 +53,19 @@ export default makeStyles((theme) => ({
     justifyContent: "space-between",
     padding: "1rem 0",
   },
-  inputElements: {
+  inputText: {
     margin: ".5rem",
     height: "3rem",
+    borderRadius: "2rem",
+    "& .MuiOutlinedInput-root": {
+      "&.Mui-focused fieldset": {
+        borderColor: "#000",
+      },
+    },
+  },
+  inputButton: {
+    margin: ".5rem",
+    height: "3rem",
+    borderRadius: "2rem",
   },
 }));

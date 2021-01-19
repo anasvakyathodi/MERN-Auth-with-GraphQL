@@ -42,7 +42,7 @@ const Home = ({ token, user, setAlert }) => {
   return (
     <Container maxWidth="xl" className={classes.root}>
       <Header name={user} logout={handleLogout} />
-      <Chat />
+      <Chat {...{ user }} />
       <ChatInput {...{ setAlert, user }} />
     </Container>
   );
