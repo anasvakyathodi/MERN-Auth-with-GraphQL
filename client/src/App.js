@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { WebSocketLink } from "@apollo/client/link/ws";
-import "./App.css";
+import "./styles/styles.scss";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/Home";
 import Notification from "./components/Notification";
-
 const link = new WebSocketLink({
   uri: "ws://localhost:5000/subscriptions",
   options: {
